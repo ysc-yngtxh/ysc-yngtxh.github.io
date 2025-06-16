@@ -29,5 +29,5 @@ features = [
 
 # If the theme has a single author
 [author]
-  name = 'Yousc Hugo'
+  name = 'Yousc Hugo(feature_gh-pages)'
   homepage = 'https://tomo.dev'
