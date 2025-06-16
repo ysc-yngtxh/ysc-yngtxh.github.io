@@ -11,7 +11,7 @@ jsonLD = true
 showAuthor = true
 
 [author]
-  name = "Yousc Hugo"
+  name = "Yousc Hugo(feature_github-actions)"
   email = "user@example.com"
 
 [header]
