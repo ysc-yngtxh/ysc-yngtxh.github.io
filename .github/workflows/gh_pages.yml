@@ -5,7 +5,7 @@ on:
   # 在目标为默认分支的推送上运行
   push:
     branches:
-      - master
+      - feature_gh-pages
   # 允许您手动从“Actions”标签运行此工作流程（比如：可以在 GitHub项目的 Actions 中手动运行 workflow）
   workflow_dispatch:
 
