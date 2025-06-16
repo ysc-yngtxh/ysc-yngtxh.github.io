@@ -1,5 +1,5 @@
 # 用于构建和部署Hugo网站到GitHub Pages的示例工作流程
-name: 自动构建部署并发布Hugo网站到Github Pages
+name: 分支【feature_github-actions】自动构建部署并发布Hugo网站到Github Pages
 
 on:
   # 在目标为默认分支的推送上运行
