@@ -1,0 +1,66 @@
+# 工作流的名称，将显示在 GitHub 仓库的 Actions 选项卡中
+name: Deploy Hugo to GitHub Pages
+
+# 触发条件配置
+on:
+  # 当代码推送到指定分支时触发（请根据实际情况修改为你自己的发布分支，通常是 main 或 master）
+  push:
+    branches:
+      - feature_gh-pages
+  # 允许在 GitHub 的 Actions 页面手动点击按钮运行此工作流
+  workflow_dispatch:
+
+# 并发控制：确保同一时间只有一个部署任务在运行
+# 如果有新的推送触发了部署，旧的未完成的任务会被自动取消，避免部署冲突
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# 任务定义
+jobs:
+  build-deploy:
+    # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
+    runs-on: ubuntu-latest
+
+    # 赋予 GITHUB_TOKEN 必要的权限，供部署 Action 使用
+    permissions:
+      contents: write  # 允许向仓库写入文件（即推送到 gh-pages 分支）
+      pages: write     # 允许部署 GitHub Pages
+      id-token: write  # 允许使用 OIDC 令牌（用于认证和部署）
+
+    # 步骤定义
+    steps:
+      # 第一步：检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 如果项目包含 Git Submodule（例如将主题作为子模块），需要递归拉取
+          submodules: recursive
+          # 拉取完整的 Git 提交历史记录。这对于 Hugo 主题的 enableGitInfo（显示最后修改时间）功能是必须的
+          fetch-depth: 0
+
+      # 第二步：安装 Hugo 环境
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          # 指定 Hugo 版本，'latest' 表示始终使用最新版本
+          hugo-version: 'latest'
+          # 启用 Extended 版本（包含 SCSS/SASS 编译功能，绝大多数现代主题需要）
+          extended: true
+
+      # 第三步：执行构建
+      - name: Build
+        # --minify 用于压缩输出的 HTML/XML/CSS/JS 文件，提升加载速度
+        # --gc 用于在构建后清理无用的缓存文件，保持构建环境干净
+        run: hugo --minify --gc
+
+      # 第四步：部署到 GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          # 使用 GitHub 自动生成的 Token 进行权限认证
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 指定 Hugo 编译后生成的静态文件目录（默认就是 public）
+          publish_dir: ./public
+          # 可选：如果你想将静态文件推送到其它分支（默认是 gh-pages），可以取消下面这行的注释
+          publish_branch: gh-pages
