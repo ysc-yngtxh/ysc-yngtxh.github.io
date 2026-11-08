@@ -62,5 +62,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}   # ${{ secrets.GITHUB_TOKEN }} 是 GitHub Actions 内置的、自动生成的临时令牌，无需额外在 GitHub 仓库中进行手动创建或配置。
           # 指定 Hugo 编译后生成的静态文件目录（默认就是 public）
           publish_dir: ./public
-          # 可选：如果你想将静态文件推送到其它分支（默认是 feature-pages），可以取消下面这行的注释
-          publish_branch: feature-pages
+          # 可选：如果你想将静态文件推送到其它分支（默认是 feature-github-pages），可以取消下面这行的注释
+          publish_branch: feature-github-pages
