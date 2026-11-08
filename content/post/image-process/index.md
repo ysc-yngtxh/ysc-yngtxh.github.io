@@ -1,7 +1,7 @@
 +++
 # author = "Hugo Authors"
 title = "Image Process"
-date = "2025-06-01"
+date = "2026-11-01"
 description = "Demo of Hugo's image processing"
 tags = ["custom"]
 toc = false

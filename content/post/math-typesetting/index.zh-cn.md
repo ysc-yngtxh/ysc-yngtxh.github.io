@@ -1,7 +1,7 @@
 ---
 author: Hugo Authors
 title: 数学符号
-date: 2019-03-08
+date: "2024-11-01"
 description: KaTeX 设置简要指南
 math: true
 # Photo by <a href="https://unsplash.com/@antoine1003?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Antoine Dautry</a> on <a href="https://unsplash.com/photos/mathematics-computation-05A-kdOH6Hw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>

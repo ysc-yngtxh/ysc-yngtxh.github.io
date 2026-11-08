@@ -6,7 +6,7 @@ on:
   # 当代码推送到指定分支时触发（请根据实际情况修改为你自己的发布分支，通常是 main 或 master）
   push:
     branches:
-      - feature_gh-pages
+      - master
   # 允许在 GitHub 的 Actions 页面手动点击按钮运行此工作流
   workflow_dispatch:
 
@@ -32,7 +32,7 @@ jobs:
     steps:
       # 第一步：检出代码
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # 如果项目包含 Git Submodule（例如将主题作为子模块），需要递归拉取
           submodules: recursive
@@ -63,4 +63,4 @@ jobs:
           # 指定 Hugo 编译后生成的静态文件目录（默认就是 public）
           publish_dir: ./public
           # 可选：如果你想将静态文件推送到其它分支（默认是 gh-pages），可以取消下面这行的注释
-          publish_branch: gh-pages
+          publish_branch: feature-pages

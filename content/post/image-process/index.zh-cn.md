@@ -1,7 +1,7 @@
 +++
 # author = "Hugo Authors"
 title = "图片处理"
-date = "2025-06-01"
+date = "2026-11-01"
 description = "关于Hugo中图片处理的示例"
 tags = ["custom"]
 toc = false
