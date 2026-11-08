@@ -43,7 +43,3 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 ### Local Shortcode
 
 {{< asciinema_local "239367.cast" >}}
-
-## n8n
-
-{{< n8n src="n8n-example.json" >}}

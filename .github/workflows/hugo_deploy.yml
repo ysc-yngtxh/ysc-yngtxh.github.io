@@ -22,7 +22,7 @@ jobs:
     # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
     runs-on: ubuntu-latest
 
-    # 赋予 GITHUB_TOKEN 必要的权限，供部署 Action 使用
+    # 赋予在以下配置中 GITHUB_TOKEN属性 必要的权限，供部署 Action 使用
     permissions:
       contents: write  # 允许向仓库写入文件（即推送到 gh-pages 分支）
       pages: write     # 允许部署 GitHub Pages
@@ -59,8 +59,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           # 使用 GitHub 自动生成的 Token 进行权限认证
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}   # ${{ secrets.GITHUB_TOKEN }} 是 GitHub Actions 内置的、自动生成的临时令牌，无需额外在 GitHub 仓库中进行手动创建或配置。
           # 指定 Hugo 编译后生成的静态文件目录（默认就是 public）
           publish_dir: ./public
-          # 可选：如果你想将静态文件推送到其它分支（默认是 gh-pages），可以取消下面这行的注释
+          # 可选：如果你想将静态文件推送到其它分支（默认是 feature-pages），可以取消下面这行的注释
           publish_branch: feature-pages
