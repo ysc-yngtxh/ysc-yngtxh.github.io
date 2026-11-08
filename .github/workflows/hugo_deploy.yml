@@ -10,8 +10,8 @@ on:
   # 允许在 GitHub 的 Actions 页面手动点击按钮运行此工作流
   workflow_dispatch:
 
-# 并发控制：确保同一时间只有一个部署任务在运行
-# 如果有新的推送触发了部署，旧的未完成的任务会被自动取消，避免部署冲突
+# 并发控制，确保同一时间只有一个 Pages 部署任务在运行
+# 设置为 true 表示如果有新的推送触发了部署，旧的未完成的任务会被自动取消，避免部署冲突。
 concurrency:
   group: "pages"
   cancel-in-progress: true
