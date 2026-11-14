@@ -65,7 +65,7 @@ jobs:
       - name: Build
         # --minify 用于压缩输出的 HTML/XML/CSS/JS 文件，提升加载速度
         # --gc 用于在构建后清理无用的缓存文件，保持构建环境干净
-        run: hugo --minify --gc --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify --gc
 
       # 第四步：部署到 GitHub Pages
       - name: Deploy
