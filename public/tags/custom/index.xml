@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>CustomTag on Hugo Theme Tailwind Example Site</title>
+		<link>http://localhost:1313/tags/custom/</link>
+		<description>Recent content in CustomTag on Hugo Theme Tailwind Example Site</description>
+		<generator>Hugo</generator>
+		<language>en-US</language>
+		
+			<managingEditor>user@example.com (游家纨绔)</managingEditor>
+		
+		
+			<webMaster>user@example.com (游家纨绔)</webMaster>
+		
+		
+			<copyright>游家纨绔</copyright>
+		
+		
+			<atom:link href="http://localhost:1313/tags/custom/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Image Process</title>
+				<link>http://localhost:1313/post/image-process/</link>
+				<pubDate>Sun, 01 Nov 2026 00:00:00 +0000</pubDate><author>user@example.com (游家纨绔)</author>
+				<guid>http://localhost:1313/post/image-process/</guid>
+				<description>&lt;p&gt;&lt;div class=&#34;not-prose&#34;&gt;&#xA;&lt;picture&gt;&#xA;    &lt;source type=&#34;image/webp&#34; srcset=&#34;http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_ef064d2e5bf8d6eb.webp 320w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_3b8a57d50875df9d.webp 640w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_cf2bb630aba91eac.webp 960w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_d1a42c7491d47899.webp 1280w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_2d82fd5e50d180f8.webp 1600w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_c5423f9e6943032b.webp 1920w&#34; sizes=&#34;(min-width: 1024px) 100vw, 50vw&#34; /&gt;&#xA;    &lt;source type=&#34;image/jpeg&#34; srcset=&#34;http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_e095bf648a9f7d35.jpg 320w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_5025cd999e674f4c.jpg 640w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_606ef81242148de4.jpg 960w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_6e9f762b389fc070.jpg 1280w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_3e27b90ba4f8f732.jpg 1600w, http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_695df0d5b397a625.jpg 1920w&#34; sizes=&#34;(min-width: 1024px) 100vw, 50vw&#34; /&gt;&#xA;    &lt;img class=&#34;h-auto max-w-full rounded-lg&#34; src=&#34;http://localhost:1313/post/image-process/images/behnam-norouzi-_1ok63FFlM4-unsplash_hu_5025cd999e674f4c.jpg&#34; width=&#34;4466&#34; height=&#34;5825&#34; alt=&#34;Photo by Behnam Norouzi on Unsplash&#34; title=&#34;Photo by Behnam Norouzi on Unsplash&#34; loading=&#34;lazy&#34; /&gt;&#xA;  &lt;/picture&gt;&lt;p class=&#34;text-sm text-center text-slate-500 dark:text-slate-300&#34;&gt;Photo by Behnam Norouzi on Unsplash&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;div class=&#34;not-prose&#34;&gt;&#xA;&lt;figure&gt;&#xA;    &lt;img src=&#34;https://placeholder.co/1024x768/png&#34;&#xA;      alt=&#34;placeholder&#34;  title=&#34;Test for external image&#34; &#xA;      loading=&#34;lazy&#34;&#xA;    &gt;&lt;figcaption class=&#34;text-sm text-center text-slate-500 dark:text-slate-300&#34;&gt;Test for external image&lt;/figcaption&gt;&#xA;  &lt;/figure&gt;&lt;/div&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;div class=&#34;not-prose&#34;&gt;&#xA;&lt;figure&gt;&#xA;    &lt;img src=&#34;./images/hugo-logo-wide.svg&#34;&#xA;      alt=&#34;svg&#34;  title=&#34;Test for svg&#34; &#xA;      loading=&#34;lazy&#34;&#xA;    &gt;&lt;figcaption class=&#34;text-sm text-center text-slate-500 dark:text-slate-300&#34;&gt;Test for svg&lt;/figcaption&gt;&#xA;  &lt;/figure&gt;&lt;/div&gt;&#xA;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
