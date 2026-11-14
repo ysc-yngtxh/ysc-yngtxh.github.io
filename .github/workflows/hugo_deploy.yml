@@ -56,12 +56,7 @@ jobs:
           # 启用 Extended 版本（包含 SCSS/SASS 编译功能，绝大多数现代主题需要）
           extended: true
 
-      # 第三步：配置 Pages（获取 baseURL 等上下文信息）
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
-      # 第四步：执行 Hugo 构建
+      # 第三步：执行构建
       - name: Build
         # --minify 用于压缩输出的 HTML/XML/CSS/JS 文件，提升加载速度
         # --gc 用于在构建后清理无用的缓存文件，保持构建环境干净
