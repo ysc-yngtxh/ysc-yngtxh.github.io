@@ -1,5 +1,5 @@
 # 工作流的名称，将显示在 GitHub 仓库的 Actions 选项卡中
-name: Deploy Hugo to GitHub Pages
+name: Deploy Hugo to GitHub Pages Preview
 
 # 触发条件配置
 on:
@@ -21,6 +21,8 @@ jobs:
   build-deploy:
     # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
     runs-on: ubuntu-latest
+    # 关联到在设置中创建的环境
+    environment: Preview
 
     # 赋予在以下配置中 GITHUB_TOKEN属性 必要的权限，供部署 Action 使用
     permissions:
@@ -33,6 +35,7 @@ jobs:
       # 第一步：检出代码
       - name: Checkout
         uses: actions/checkout@v7
+        run: echo "Deploying to Preview..."
         with:
           # 如果项目包含 Git Submodule（例如将主题作为子模块），需要递归拉取
           submodules: recursive
