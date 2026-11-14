@@ -1,0 +1,142 @@
+# 使用官方推荐的 Artifact 方式，自动构建 Hugo 并部署到 GitHub Pages
+name: Deploy Hugo to GitHub Pages (Official Artifact)
+run-name: Deploy to【${{ github.head_ref || github.ref_name }}】by @${{ github.actor }}
+
+# 触发条件配置
+on:
+  # 当代码推送到指定分支时触发
+  push:
+    branches:
+      - release
+  # 允许在 Actions 页面手动点击运行
+  workflow_dispatch:
+
+# 并发控制，确保同一时间只有一个 Pages 部署任务在运行
+# 设置为 true 表示如果有新的推送触发了部署，旧的未完成的任务会被自动取消，避免部署冲突。
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# 默认使用 bash 终端执行 run 命令
+defaults:
+  run:
+    shell: bash
+
+# 权限配置（遵循最小权限原则）
+# 当前工作流包含 build 和 deploy 两个独立的作业。将 permissions 放在顶层，可以一次性地将相同的权限集授予所有作业，避免了在每个作业下重复声明，使配置更简洁。
+permissions:
+  contents: write  # 允许拉取（读取）仓库代码
+  pages: write     # 允许写入 GitHub Pages
+  id-token: write  # 允许使用 OIDC 令牌进行安全认证（官方部署必需）
+
+# 任务定义
+jobs:
+  # ==========================================
+  # Job 1：构建 (Build)
+  # 作用：安装环境、编译 Hugo、打包静态文件（Artifact）
+  # ==========================================
+  build:
+    # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
+    runs-on: ubuntu-latest
+    env:
+      # 统一管理 Hugo 版本号，方便后续一键升级
+      HUGO_VERSION: latest
+      HUGO_ENVIRONMENT: production
+      TZ: Asia/Shanghai # 设置时区，影响构建时间戳
+
+    # 步骤定义
+    steps:
+      # 1. 安装 Hugo CLI (Extended 版本)
+      - name: 安装 Hugo CLI
+        run: |
+          # 通过 GitHub API 获取最新的版本标签 (例如 "v0.169.0")
+          LATEST_TAG=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/${HUGO_VERSION} | jq -r .tag_name)
+          echo "正在安装 Hugo Extended 版本: ${LATEST_TAG}"
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/${LATEST_TAG}/hugo_extended_${LATEST_TAG#v}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+          # 立即验证，确认命令可用
+          hugo version
+
+      # 2. 安装 Dart Sass (部分现代主题如 Hextra/Stack 编译 SCSS 必需)
+      - name: 安装 Dart Sass
+        run: sudo snap install dart-sass
+
+      # TODO 以上两步安装 Hugo CLI、Dart Sass 的步骤，可以替换为以下这一步
+      # - name: Setup Hugo
+      #   uses: peaceiris/actions-hugo@v3
+      #   with:
+      #     hugo-version: 'latest' # 指定 Hugo 版本，'latest' 表示始终使用最新版本
+      #     extended: true         # 启用 Extended 版本（包含 SCSS/SASS 编译功能，绝大多数现代主题需要）
+
+      # 3. 检出代码
+      - name: 检出
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive # 如果项目包含 Git Submodule（例如将主题作为子模块），需要递归拉取
+          fetch-depth: 0        # 拉取全部 Git 历史，用于文章“最后更新时间”的展示
+
+      # 4. 配置 GitHub Pages
+      - name: 设置 Pages
+        id: pages
+        uses: actions/configure-pages@v6 # 获取 Pages 的 baseURL 等基础信息
+
+      # 5. 安装 Node.js 依赖 (如果项目有 package.json)
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      # 6. 缓存还原 (加速后续构建)
+      - name: 缓存还原
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ${{ runner.temp }}/hugo_cache
+          key: hugo-${{ github.run_id }}
+          restore-keys:
+            hugo-
+
+      # 7. 配置 Git (解决中文文件名在构建时可能出现的乱码问题)
+      - name: 配置 Git
+        run: git config core.quotepath false
+
+      # 8. 构建 Hugo
+      - name: 构建 Hugo
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            --cacheDir "${{ runner.temp }}/hugo_cache"
+
+      # 9. 缓存保存
+      - name: 缓存保存
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ${{ runner.temp }}/hugo_cache
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+
+      # 10. 上传构件 (Artifact)
+      - name: 上传构件
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public # 将 Hugo 生成的 public 目录打包上传，供 deploy Job 使用
+
+  # ==========================================
+  # Job 2：部署 (Deploy)
+  # 作用：从构建 Job 获取打包好的构件，部署到 GitHub Pages
+  # ==========================================
+  deploy:
+    # 配置 GitHub Pages 环境
+    environment:
+      name: Production
+      url: ${{ steps.deployment.outputs.page_url }}  # 或你的实际访问地址
+    runs-on: ubuntu-latest
+    # 依赖 build Job，只有 build 成功完成才会执行部署
+    needs: build
+    steps:
+      # 11. 部署到 GitHub Pages
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
