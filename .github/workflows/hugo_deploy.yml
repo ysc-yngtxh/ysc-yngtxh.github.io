@@ -35,7 +35,6 @@ jobs:
       # 第一步：检出代码
       - name: Checkout
         uses: actions/checkout@v7
-        run: echo "Deploying to Preview..."
         with:
           # 如果项目包含 Git Submodule（例如将主题作为子模块），需要递归拉取
           submodules: recursive
