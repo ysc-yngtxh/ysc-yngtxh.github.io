@@ -22,7 +22,7 @@ jobs:
     # 配置 GitHub Pages 环境
     environment:
       name: Preview # 关联到在设置中创建的环境
-      url: ${{ steps.deployment.outputs.page_url }}  # 或你的实际访问地址
+      url: https://ysc-yngtxh.github.io/  # 实际访问地址
     # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
     runs-on: ubuntu-latest
 
