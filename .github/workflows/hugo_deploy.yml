@@ -1,4 +1,4 @@
-# 工作流的名称，将显示在 GitHub 仓库的 Actions 选项卡中
+# 使用第三方 Action【peaceiris 维护了一个第三方 GitHub Action】推送分支，再通过分支自动构建 Hugo 并部署到 GitHub Pages
 name: Deploy Hugo to GitHub Pages Preview
 
 # 触发条件配置
@@ -21,8 +21,12 @@ jobs:
   build-deploy:
     # 配置 GitHub Pages 环境
     environment:
-      name: Preview # 关联到在设置中创建的环境
-      url: https://ysc-yngtxh.github.io/  # 实际访问地址
+      # 关联到在GitHub中 Environments 创建的环境
+      name: Preview
+      # 定义项目的实际访问地址
+      # 1、由于个人没有公网地址，所以定义的还是 GitHub 上免费的公网地址
+      # 2、由于使用的是 peaceiris/actions-gh-pages@v4 进行部署，而非 actions/deploy-pages@v4。所以动态表达式 ${{ steps.deployment.outputs.page_url }} 无法获取 GitHub 提供的免费地址
+      url: https://ysc-yngtxh.github.io/
     # 指定运行该任务的虚拟环境为最新的 Ubuntu 系统
     runs-on: ubuntu-latest
 
