@@ -26,22 +26,6 @@ Hugo 附带了几个用于丰富内容的[Shortcodes](https://gohugo.io/content-
 
 ---
 
-## X Simple Shortcode
-
-{{< x user="SanDiegoZoo" id="1453110110599868418" >}}
-
-<br>
-
----
-
-## Vimeo Simple Shortcode
-
-{{< vimeo_simple 48912912 >}}
-
-<br>
-
----
-
 ## BiliBili Simple Shortcode
 
 {{< bilibili BV1kE41147oo >}}
